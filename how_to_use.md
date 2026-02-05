@@ -19,10 +19,10 @@ Welcome to **Moonlight Addons**! Follow the instructions below to get started.
 
 4. **Run the program**  
 
-   python moonlightaddons.py
+   `python moonlightaddons.py`
 
    You should see a message like:
 
-   Moonlight Addons have been installed.
+   **Moonlight Addons have been installed.**
 
 Enjoy using Moonlight Addons! ✨
