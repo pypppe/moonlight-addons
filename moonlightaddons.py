@@ -28,7 +28,7 @@ commands = {}
 
 def info_cmd():
     print("\nMOONLIGHT ADDON INFORMATION\n")
-    print("Ver: 0.0.6")
+    print("Ver: 0.0.2")
     print("BETA Phase: Yes")
     print("Created in: UK")
     print("GitHub: yes")
@@ -55,13 +55,21 @@ def moon_cmd():
     print(f"Moon Phase: {random.choice(moons)}\n")
 
 def candle_cmd():
-    print("""
-      .
-     / \\
-    |   |
-    |🕯️  |
-    |   |
-    '---'
+    print(r"""
+        /\
+       /  \
+       \/\/
+        ~|
+       !~~-!
+       |` ,!
+       |'` |
+       |   |
+       |   |
+       |   |
+       |   |
+_______|___|_______
+\                 /
+ \_______________/
     """)
     print("A candle has been lit. ✨\n")
 
@@ -79,12 +87,17 @@ def echo_cmd(text):
 
 def star_cmd():
     print("""
-       *
-      / \\
-     /___\\
-    *     *
-    """)
-    print("A shining star appears. ✨\n")
+*       *       * 
+  *     *     *   
+    *   *   *     
+      * * *       
+* * * * * * * * * 
+      * * *       
+    *   *   *     
+  *     *     *   
+*       *       * 
+""")
+    print("A shining star appears. ✨\n") # this deadass looks like the UK flag bro im crine son
 
 def moonphase_cmd():
     phases = ["🌑 New Moon","🌒 Waxing Crescent","🌓 First Quarter","🌔 Waxing Gibbous",
@@ -110,7 +123,7 @@ def flip_cmd():
 def sysinfo_cmd():
     print("\nSYSTEM INFORMATION\n")
     print(f"CPU: {platform.processor()}")
-    print(f"OS: {platform.system()} {platform.release()}")
+    print(f"OS: {platform.system()} {platform.release()}") # this will most likely be windows 10 or 11 but it will be good to have the exact version as well because this isnt supported on mac, or linux.
     print(f"RAM: {round(psutil.virtual_memory().total / (1024**3), 2)} GB")
     print(f"Hostname: {socket.gethostname()}")
     if shutil.which("wmic"):
@@ -193,7 +206,7 @@ def processes_cmd():
             path = proc.info['exe'] if proc.info['exe'] else "N/A"
             line = f"{pid}\t{cpu}\t{mem}\t{name}\t{path}"
             if cpu>50 or mem>50:
-                line += " <-- High usage!"
+                line += " <--⚠️⚠️⚠️ High usage⚠️⚠️⚠️"
             print(line)
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
@@ -217,7 +230,7 @@ def battery_cmd():
             plugged = "Plugged In" if battery.power_plugged else "Not Plugged"
             print(f"Battery: {battery.percent}% ({plugged})\n")
         else:
-            print("Battery information not available.\n")
+            print("Battery information not available. You may be using an All in one or a PC.\n") # added this because my all in one dell pc obviously doesnt have any battery, so its good to note that you might be using an all in one or a PC.
     else:
         print("Battery info not supported.\n")
 
@@ -236,7 +249,40 @@ def reboot_cmd():
 def shutdown_cmd():
     os.system("shutdown /s /t 0")
 
-def git_cmd(): os.system("winget install --id Git.Git -e --source winget")
+def bios_cmd():
+    confirm = input("Are you sure you want to boot into BIOS? (y/n): ").lower()
+    if confirm == "y":
+        print("Restarting into BIOS!")
+        os.system("shutdown /r /fw /t 1")
+    else:
+        print("Cancelled boot into BIOS.\n")
+
+def wifiis_cmd(): # woo hoo over here lily if it goes wrong blame you / NVM IT DIDNT FUCKING BREAK LETS GO
+    print("\nConnected Wi-Fi Network")
+    print("-"*30)
+    try:
+        output = subprocess.check_output("netsh wlan show interfaces", shell=True, text=True)
+        ssid = "Not connected"
+        for line in output.splitlines():
+            if "SSID" in line and "BSSID" not in line:
+                ssid = line.split(":", 1)[1].strip()
+                break
+        print(f"Wi-Fi Name: {ssid}")
+    except subprocess.CalledProcessError:
+        print("Unable to get Wi-Fi info.")
+    print("")
+
+def whois_cmd(domain=None):
+    print("")
+    if domain:
+        url = f"https://who.is/whois/{domain}"
+        webbrowser.open(url)
+        print(f"Opening who.is for: {domain}\n")
+    else:
+        print("Usage: whois [domain]\n")
+
+def git_cmd():
+    webbrowser.open("https://git-scm.com/download/win")
 def gith_cmd(): webbrowser.open("https://github.com")
 def githd_cmd(): os.system('start "" "C:\\Users\\%USERNAME%\\AppData\\Local\\GitHubDesktop\\GitHubDesktop.exe"')
 def gitd_cmd(): os.system('start "" "C:\\Program Files\\Git\\git-bash.exe"')
@@ -248,7 +294,7 @@ def twitter_cmd(): webbrowser.open("https://twitter.com")
 def reddit_cmd(): webbrowser.open("https://reddit.com")
 def open_cmd(url=None): 
     if url: webbrowser.open(url)
-    else: print("Usage: open [url]\n")
+    else: print("Usage: open [url]\n") # for some fucking reason it uses mircosft edge instead of my default browser, im not changing it though too bad too sad innit
 
 def exit_cmd():
     print("Exiting Moonlight Addons...")
@@ -279,6 +325,7 @@ all_commands = {
     "time": time_cmd,
     "date": date_cmd,
     "clear": clear_cmd,
+    "cls": clear_cmd,
     "battery": battery_cmd,
     "screenshot": screenshot_cmd,
     "reboot": reboot_cmd,
@@ -288,13 +335,19 @@ all_commands = {
     "githd": githd_cmd,
     "gitd": gitd_cmd,
     "tm": tm_cmd,
+    "taskmanager": tm_cmd,
+    "taskmgr": tm_cmd,
     "zandovo": zandovo_cmd,
     "githr": githr_cmd,
-    "yt": yt_cmd,
+    "youtube": yt_cmd,
     "twitter": twitter_cmd,
     "reddit": reddit_cmd,
     "open": open_cmd,
-    "exit": exit_cmd
+    "exit": exit_cmd,
+    "close": exit_cmd,
+    "bios": bios_cmd,
+    "wifiis": wifiis_cmd,
+    "whois": whois_cmd
 }
 
 def help_cmd():
@@ -303,7 +356,7 @@ all_commands["help"] = help_cmd
 
 commands = all_commands
 
-print("🕯️ Moonlight Addons has been installed. 🕯️")
+print("🕯️ Moonlight Addons has been imported 🕯️")
 print("Type 'help' for a list of commands.")
 print("Type 'info' for Moonlight Addons information.\n")
 
@@ -322,3 +375,5 @@ while True:
             print(f"Usage: {cmd} [arguments]\n")
     else:
         print("Unknown command. Type 'help' for a list of commands.\n")
+
+        # holy shit
