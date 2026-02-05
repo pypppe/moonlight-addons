@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moonlight Addons</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body { background:#1e1e1e; color:#f0f0f0; min-height:100vh; display:flex; flex-direction:column; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:#2c2c2c; font-size:18px; }
+    .topbar .left { font-weight:600; }
+    .topbar .right { display:flex; gap:40px; }
+    .topbar .right a { color:#f0f0f0; text-decoration:none; font-weight:500; transition:0.3s; }
+    .topbar .right a:hover { color:#80c0ff; }
+    .main-content { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:100px 20px; }
+    .main-content h1 { font-size:60px; font-weight:700; margin-bottom:30px; }
+    .main-content p { font-size:24px; max-width:800px; line-height:1.8; }
+    @media (max-width:768px){ .topbar { flex-direction:column; gap:15px; } .topbar .right { gap:20px; } .main-content h1 { font-size:48px; } .main-content p { font-size:20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="left">Moonlight Addons</div>
+    <div class="right">
+      <a href="https://maddons.astrarune.com/download">Download</a>
+      <a href="https://github.com/pypppe/moonlight-addons/blob/main/README.md">How to use</a>
+      <a href="https://maddons.astrarune.com/home">Home</a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <h1>Moonlight Addons</h1>
+    <p>Check out the official instructions here: <a href="https://github.com/pypppe/moonlight-addons/blob/main/README.md" style="color:#80c0ff; text-decoration:underline;">How to use Moonlight Addons</a></p>
+  </div>
+
+</body>
+</html>
